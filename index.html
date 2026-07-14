@@ -17,14 +17,14 @@ input::file-selector-button{border:0;background:#fff;color:#b00000;padding:8px 1
 .hint{margin-top:14px;padding:12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:13px;line-height:1.5}.hr{height:1px;background:var(--line);margin:16px 0}.small{font-size:12px}
 .logo-preview-wrap{display:flex;align-items:center;justify-content:center;min-height:110px;border:1px dashed rgba(255,255,255,.28);border-radius:12px;background:rgba(255,255,255,.04);padding:12px;overflow:hidden}#logoPreview{max-width:100%;max-height:90px;object-fit:contain;display:none}
 .lp-grid{display:grid;gap:10px}.lp-item{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:10px;align-items:center;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(255,255,255,.04)}.lp-check{display:flex;align-items:center;gap:10px;color:#fff;margin:0}.lp-check input{width:auto;margin:0}.lp-pct-wrap{display:flex;align-items:center;gap:8px}.lp-pct-wrap input{padding:10px 12px}
-.report-shell{padding:0}.report-screen-head{padding:18px 18px 0}.report-page{background:#fff;color:var(--print);border-radius:14px;margin:18px;padding:20mm 18mm 18mm;box-shadow:0 10px 30px rgba(0,0,0,.18);min-height:297mm;position:relative}.report-top{display:grid;grid-template-columns:1fr 220px;gap:18px}.report-logo-box{min-height:70px;display:flex;justify-content:flex-end}.report-logo-box img{max-width:220px;max-height:80px;object-fit:contain;display:none}
+.report-shell{padding:0}.report-screen-head{padding:18px 18px 0}.report-stack{display:flex;flex-direction:column;gap:18px;padding:18px}.report-page{background:#fff;color:var(--print);border-radius:14px;padding:18mm 18mm 18mm;box-shadow:0 10px 30px rgba(0,0,0,.18);min-height:297mm;position:relative;overflow:hidden}.report-top{display:grid;grid-template-columns:1fr 220px;gap:18px}.report-logo-box{min-height:70px;display:flex;justify-content:flex-end}.report-logo-box img{max-width:220px;max-height:80px;object-fit:contain;display:none}
 .report-title{font-size:26px;font-weight:900;line-height:1.1;margin-bottom:8px}.report-subtitle{color:var(--pm);font-size:14px;line-height:1.5}.report-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:16px;padding:14px 0;border-top:1px solid var(--pl);border-bottom:1px solid var(--pl)}.mk{font-size:12px;color:var(--pm);margin-bottom:3px}.mv{font-size:14px;font-weight:600}
 .report-sum{margin-top:14px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.report-total-box,.report-block{border:1px solid var(--pl);border-radius:12px;padding:14px;background:#fafafa}.report-total-box .k{font-size:12px;color:var(--pm);margin-bottom:5px}.report-total-box .v{font-size:32px;font-weight:900;line-height:1.05}.report-notice{font-size:13px;line-height:1.55;color:#333}
 table{width:100%;border-collapse:collapse}.report-table{font-size:13px;margin-top:14px}.report-table th,.report-table td{padding:8px;border-bottom:1px solid var(--pl);text-align:right;vertical-align:top}.report-table th:first-child,.report-table td:first-child{text-align:left}
 .report-block{margin-top:14px;background:#fff;page-break-inside:avoid}.report-block h3{font-size:14px;margin-bottom:8px}.formula{font-size:12px;line-height:1.55;color:#222}.formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-top:8px}.formula-item{border-top:1px solid #eee;padding-top:6px;font-size:12px;line-height:1.45}.formula-item b{display:block;margin-bottom:2px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-word}
 .report-footer{position:absolute;left:18mm;right:18mm;bottom:12mm;padding-top:8px;border-top:1px solid var(--pl);font-size:11px;color:var(--pm);display:flex;justify-content:space-between}.page-no:after{content:"Seite 1"}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modal .box{background:#fff;color:#111;max-width:1100px;width:100%;max-height:90vh;overflow:auto;border-radius:14px}.modal .head{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}.modal .cnt{padding:12px 16px 20px}.modal table{font-size:14px}.modal th,.modal td{padding:9px;border-bottom:1px solid #eee;text-align:right}.modal th:first-child,.modal td:first-child{text-align:left}
-@media print{@page{size:A4 portrait;margin:0}html,body{background:#fff!important}.app-head,.control-card,.report-screen-head,.modal{display:none!important}.wrap{max-width:none;margin:0;padding:0}.app-grid{display:block;margin:0}.preview-card{border:0!important;background:#fff!important;padding:0!important}.report-page{width:210mm;height:297mm;min-height:297mm;margin:0;border-radius:0;box-shadow:none;padding:20mm 18mm 18mm}.report-page *{color:#111!important}}
+@media print{@page{size:A4 portrait;margin:0}html,body{background:#fff!important;width:210mm}.app-head,.control-card,.report-screen-head,.modal{display:none!important}.wrap{max-width:none;margin:0;padding:0}.app-grid{display:block;margin:0}.preview-card{border:0!important;background:#fff!important;padding:0!important}.report-stack{display:block;padding:0}.report-page{width:210mm;height:297mm;min-height:297mm;margin:0;border-radius:0;box-shadow:none;padding:18mm 18mm 18mm;overflow:hidden;page-break-after:always;break-after:page}.report-page:last-child{page-break-after:auto;break-after:auto}.report-page *{color:#111!important}.report-top,.report-meta,.report-sum,.report-table,.report-block{page-break-inside:avoid;break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -79,38 +79,51 @@ table{width:100%;border-collapse:collapse}.report-table{font-size:13px;margin-to
 <div class="lp-grid" id="lpGrid"></div>
 </div>
 
-<div class="btnbar"><button class="btn" type="button" onclick="window.print()">PDF / Drucken</button><button class="btn secondary" type="button" onclick="openModal()">HOAI-Tabelle</button><button class="btn secondary" type="button" onclick="resetForm()">Zurücksetzen</button></div>
+<div class="btnbar"><button class="btn" type="button" onclick="window.print()">PDF / Drucken</button><button class="btn secondary" type="button" onclick="openModal()">HOAI-Tabelle</button><button class="btn secondary" type="button" onclick="resetForm()">Zurücksetzen</button></div><div class="hint">PDF-Tipp: Im Druckdialog A4, Hochformat, 100 % Skalierung und möglichst keine Browser-Kopf-/Fußzeilen wählen.</div>
 </section>
 
 <section class="card preview-card report-shell">
-<div class="report-screen-head"><h1>Berichtsvorschau</h1><p class="lead muted">Diese Seite wird als druckfähiges Blatt ausgegeben.</p></div>
+<div class="report-screen-head"><h1>Berichtsvorschau</h1><p class="lead muted">Der Bericht wird bewusst auf zwei A4-Seiten ausgegeben.</p></div>
+<div class="report-stack">
+
 <article class="report-page">
-<div class="report-top"><div><div class="report-title">HOAI-Honorarermittlung</div><div class="report-subtitle">Berechnung für Gebäude und Innenräume auf Grundlage der hinterlegten Honorartafelwerte.</div></div><div class="report-logo-box"><img id="reportLogo" alt="Logo"></div></div>
-
+<div class="report-top"><div><div class="report-title">HOAI-Honorarermittlung</div><div class="report-subtitle">Zusammenfassung der Honorarberechnung für Gebäude und Innenräume.</div></div><div class="report-logo-box"><img class="reportLogo" alt="Logo"></div></div>
 <section class="report-meta">
-<div><div class="mk">Projekt</div><div class="mv" id="rProject">–</div></div>
-<div><div class="mk">Datum</div><div class="mv" id="rDate">–</div></div>
-<div><div class="mk">Bauherr / Auftraggeber</div><div class="mv" id="rClient">–</div></div>
-<div><div class="mk">Gebäudetyp / Notiz</div><div class="mv" id="rType">–</div></div>
+<div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
+<div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
+<div><div class="mk">Bauherr / Auftraggeber</div><div class="mv rClient">–</div></div>
+<div><div class="mk">Gebäudetyp / Notiz</div><div class="mv rType">–</div></div>
 </section>
-
 <section class="report-sum">
-<div class="report-total-box"><div class="k">Anrechenbare Kosten</div><div class="v" id="rAkTotal">–</div></div>
-<div class="report-notice"><strong>Grundlage:</strong> Honorarzone <span id="rZone">–</span>, <span id="rCorridor">–</span>.<br>Umbauzuschlag: <span id="rUmbau">–</span>; freier Zuschlag: <span id="rFree">–</span>.<br>Leistungsphasenanteil: <span id="rLpPct">–</span>.</div>
+<div class="report-total-box"><div class="k">Anrechenbare Kosten</div><div class="v rAkTotal">–</div></div>
+<div class="report-notice"><strong>Grundlage:</strong> Honorarzone <span class="rZone">–</span>, <span class="rCorridor">–</span>.<br>Umbauzuschlag: <span class="rUmbau">–</span>; freier Zuschlag: <span class="rFree">–</span>.<br>Leistungsphasenanteil: <span class="rLpPct">–</span>.</div>
 </section>
+<section class="report-block"><h3>Ermittlung der anrechenbaren Kosten</h3><div class="formula akReportFormula">–</div></section>
+<table class="report-table"><thead><tr><th>Zusammenfassung</th><th>Wert</th></tr></thead><tbody id="summaryRows"></tbody><tfoot><tr><td><strong>Honorar brutto</strong></td><td class="rGrossTotal"><strong>–</strong></td></tr></tfoot></table>
+<footer class="report-footer"><div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 1 von 2</div></footer>
+</article>
 
-<table class="report-table"><thead><tr><th>Berechnungsposition</th><th>Wert</th></tr></thead><tbody id="reportRows"></tbody><tfoot><tr><td><strong>Honorar brutto</strong></td><td id="rGrossTotal"><strong>–</strong></td></tr></tfoot></table>
-
-<section class="report-block"><h3>Ermittlung der anrechenbaren Kosten</h3><div class="formula" id="akReportFormula">–</div></section>
-
+<article class="report-page">
+<div class="report-top"><div><div class="report-title">Berechnungsnachweis</div><div class="report-subtitle">Detaillierte Herleitung der anrechenbaren Kosten und des Tabellenhonorars.</div></div><div class="report-logo-box"><img class="reportLogo" alt="Logo"></div></div>
+<section class="report-meta">
+<div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
+<div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
+<div><div class="mk">Honorarzone</div><div class="mv rZone">–</div></div>
+<div><div class="mk">Honorarsatz</div><div class="mv rCorridor">–</div></div>
+</section>
+<table class="report-table"><thead><tr><th>Berechnungsposition</th><th>Wert</th></tr></thead><tbody id="detailRows"></tbody></table>
+<section class="report-block"><h3>Formel der anrechenbaren Kosten</h3><div class="formula akReportFormula">–</div></section>
 <section class="report-block"><h3>Interpolationsnachweis</h3><div class="formula" id="interpSummary">–</div><div class="formula-grid">
 <div class="formula-item"><b>Unterer Tabellenpunkt</b><div id="interpLow" class="mono">–</div></div>
 <div class="formula-item"><b>Oberer Tabellenpunkt</b><div id="interpHigh" class="mono">–</div></div>
 <div class="formula-item"><b>Interpolationsfaktor</b><div id="interpT" class="mono">–</div></div>
 <div class="formula-item"><b>Rechnung</b><div id="interpFormula" class="mono">–</div></div>
 </div></section>
-<footer class="report-footer"><div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div class="page-no"></div></footer>
+<section class="report-block"><h3>Ausgewählte Leistungsphasen</h3><div class="formula" id="selectedLphReport">–</div></section>
+<footer class="report-footer"><div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 2 von 2</div></footer>
 </article>
+
+</div>
 </section>
 </main>
 
@@ -144,24 +157,28 @@ function calcAK(){
 }
 function curve(zone,k){if(k==='mid')return HOAI[zone].min.map((r,i)=>[r[0],(r[1]+HOAI[zone].max[i][1])/2]);return HOAI[zone][k]}
 function interpolate(zone,ak,k){const c=curve(zone,k);if(ak<=c[0][0])return{honor:c[0][1],exact:true,low:c[0],high:c[0],factor:0};if(ak>=c.at(-1)[0])return{honor:c.at(-1)[1],exact:true,low:c.at(-1),high:c.at(-1),factor:0};for(let i=0;i<c.length-1;i++){const[a1,h1]=c[i],[a2,h2]=c[i+1];if(ak===a1)return{honor:h1,exact:true,low:c[i],high:c[i],factor:0};if(ak===a2)return{honor:h2,exact:true,low:c[i+1],high:c[i+1],factor:0};if(ak>a1&&ak<a2){const t=(ak-a1)/(a2-a1);return{honor:h1+t*(h2-h1),exact:false,low:c[i],high:c[i+1],factor:t}}}}
+function setAll(sel,val){document.querySelectorAll(sel).forEach(el=>el.textContent=val)}
+function selectedLphText(){if(document.getElementById('lpSelect').value==='all')return 'LPH 1–9 vollständig (100,0 %).';const arr=LPH.map(x=>{const a=document.querySelector(`.lp-active[data-lp="${x.nr}"]`),p=document.querySelector(`.lp-pct[data-lp="${x.nr}"]`);return{...x,active:a&&a.checked,current:+((p&&p.value)||0)}}).filter(x=>x.active).map(x=>`LPH ${x.nr} ${x.name}: ${pct(x.current)}`);return arr.length?arr.join(' · '):'Keine Leistungsphase ausgewählt.'}
 function calc(){
  const akData=calcAK(),ak=akData.ak,zone=document.getElementById('zone').value,k=document.getElementById('korridor').value;
  const uz=+document.getElementById('umbauZ').value||0,mwst=+document.getElementById('mwst').value||0,free=+document.getElementById('freeHonor').value||0,lp=lpPercent();
  const ip=interpolate(zone,ak,k),base=ip.honor,umbau=base*uz/100,withUmbau=base+umbau,freeAmt=withUmbau*free/100,withFree=withUmbau+freeAmt,net=withFree*lp/100,vat=net*mwst/100,gross=net+vat;
  document.getElementById('lpWrap').style.display=document.getElementById('lpSelect').value==='custom'?'block':'none';
  document.getElementById('stamp').textContent='Stand: '+new Date().toLocaleDateString('de-DE');
- ['rProject','rClient','rType'].forEach((id,i)=>document.getElementById(id).textContent=[projectName.value,clientName.value,projectType.value][i]||'–');rDate.textContent=formatDate(projectDate.value);
- rAkTotal.textContent=euro(ak);akPreview.textContent=euro(ak);akFormulaPreview.textContent=akData.formula;akReportFormula.textContent=akData.formula;
- rGrossTotal.innerHTML='<strong>'+euro(gross)+'</strong>';rZone.textContent=zone;rCorridor.textContent=corridorLabel(k);rUmbau.textContent=pct(uz);rFree.textContent=pct(free);rLpPct.textContent=pct(lp);
- const rows=[['KG 300 – Baukonstruktion',euro(akData.kg300)],['KG 400 – Technische Anlagen',euro(akData.kg400)],['davon KG 400 anrechenbar',euro(akData.kg400AK)],['Anrechenbare Kosten gesamt',euro(ak)],[`Tabellenhonorar (${corridorLabel(k)})`,euro(base)],[`zzgl. Umbauzuschlag (${pct(uz)})`,euro(umbau)],[`zzgl. freier Zuschlag (${pct(free)})`,euro(freeAmt)],[`Honorar für ausgewählte LPH (${pct(lp)})`,euro(net)],[`zzgl. MwSt. (${pct(mwst)})`,euro(vat)]];
- reportRows.innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
- const[a1,h1]=ip.low,[a2,h2]=ip.high;interpSummary.innerHTML=ip.exact?`Für <strong>${euro(ak)}</strong> wird ein direkter Tabellen- oder Randwert angesetzt.`:`Für <strong>${euro(ak)}</strong> wird linear zwischen <strong>${euro(a1)}</strong> und <strong>${euro(a2)}</strong> interpoliert.`;
- interpLow.textContent=`AK1 = ${euro(a1)} | H1 = ${euroDec(h1)}`;interpHigh.textContent=`AK2 = ${euro(a2)} | H2 = ${euroDec(h2)}`;
- interpT.textContent=ip.exact?'kein Interpolationsschritt erforderlich':`t = (${euroDec(ak)} − ${euroDec(a1)}) / (${euroDec(a2)} − ${euroDec(a1)}) = ${num(ip.factor)}`;
- interpFormula.textContent=ip.exact?`Ergebnis = ${euroDec(base)}`:`H = ${euroDec(h1)} + (${euroDec(h2)} − ${euroDec(h1)}) × ${num(ip.factor)} = ${euroDec(base)}`;
+ const project=document.getElementById('projectName').value||'–',client=document.getElementById('clientName').value||'–',type=document.getElementById('projectType').value||'–',date=formatDate(document.getElementById('projectDate').value);
+ setAll('.rProject',project);setAll('.rClient',client);setAll('.rType',type);setAll('.rDate',date);setAll('.rAkTotal',euro(ak));setAll('.rGrossTotal',euro(gross));setAll('.rZone',zone);setAll('.rCorridor',corridorLabel(k));setAll('.rUmbau',pct(uz));setAll('.rFree',pct(free));setAll('.rLpPct',pct(lp));setAll('.akReportFormula',akData.formula);
+ document.getElementById('akPreview').textContent=euro(ak);document.getElementById('akFormulaPreview').textContent=akData.formula;document.getElementById('selectedLphReport').textContent=selectedLphText();
+ const summary=[['KG 300 – Baukonstruktion',euro(akData.kg300)],['KG 400 – Technische Anlagen',euro(akData.kg400)],['Davon KG 400 anrechenbar',euro(akData.kg400AK)],[`Tabellenhonorar (${corridorLabel(k)})`,euro(base)],['Honorar netto',euro(net)],[`MwSt. (${pct(mwst)})`,euro(vat)]];
+ document.getElementById('summaryRows').innerHTML=summary.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+ const detail=[['KG 300 – Baukonstruktion',euro(akData.kg300)],['KG 400 – Technische Anlagen',euro(akData.kg400)],['25-%-Grenze bezogen auf KG 300',euro(akData.kg300*.25)],['KG 400 innerhalb der Grenze',euro(akData.limit)],['KG 400 oberhalb der Grenze',euro(akData.above)],['Davon 50 % anrechenbar',euro(akData.above*.5)],['Anrechenbarer Anteil KG 400',euro(akData.kg400AK)],['Anrechenbare Kosten gesamt',euro(ak)],[`Tabellenhonorar (${corridorLabel(k)})`,euro(base)],[`Umbauzuschlag (${pct(uz)})`,euro(umbau)],[`Freier Zuschlag (${pct(free)})`,euro(freeAmt)],['Honorar vor Leistungsphasenanteil',euro(withFree)],[`Leistungsphasenanteil (${pct(lp)})`,euro(net)],[`MwSt. (${pct(mwst)})`,euro(vat)],['Honorar brutto',euro(gross)]];
+ document.getElementById('detailRows').innerHTML=detail.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+ const[a1,h1]=ip.low,[a2,h2]=ip.high;document.getElementById('interpSummary').innerHTML=ip.exact?`Für <strong>${euro(ak)}</strong> wird ein direkter Tabellen- oder Randwert angesetzt.`:`Für <strong>${euro(ak)}</strong> wird linear zwischen <strong>${euro(a1)}</strong> und <strong>${euro(a2)}</strong> interpoliert.`;
+ document.getElementById('interpLow').textContent=`AK1 = ${euro(a1)} | H1 = ${euroDec(h1)}`;document.getElementById('interpHigh').textContent=`AK2 = ${euro(a2)} | H2 = ${euroDec(h2)}`;
+ document.getElementById('interpT').textContent=ip.exact?'Kein Interpolationsschritt erforderlich.':`t = (${euroDec(ak)} − ${euroDec(a1)}) / (${euroDec(a2)} − ${euroDec(a1)}) = ${num(ip.factor)}`;
+ document.getElementById('interpFormula').textContent=ip.exact?`Ergebnis = ${euroDec(base)}`:`H = ${euroDec(h1)} + (${euroDec(h2)} − ${euroDec(h1)}) × ${num(ip.factor)} = ${euroDec(base)}`;
 }
 function handleLogoUpload(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=x=>{localStorage.setItem(LOGO_KEY,x.target.result);applyLogo(x.target.result)};r.readAsDataURL(f)}
-function applyLogo(src){[logoPreview,reportLogo].forEach(x=>{x.src=src||'';x.style.display=src?'block':'none'});logoPlaceholder.style.display=src?'none':'block'}
+function applyLogo(src){const p=document.getElementById('logoPreview'),ph=document.getElementById('logoPlaceholder');p.src=src||'';p.style.display=src?'block':'none';ph.style.display=src?'none':'block';document.querySelectorAll('.reportLogo').forEach(x=>{x.src=src||'';x.style.display=src?'block':'none'})}
 function clearLogo(){localStorage.removeItem(LOGO_KEY);logoUpload.value='';applyLogo('')}
 function resetForm(){projectName.value='Projekt Musterbau';clientName.value='Max Mustermann';projectType.value='Gebäude und Innenräume';kg300.value=500000;kg400.value=200000;kg400Full.checked=false;zone.value='III';korridor.value='mid';umbauZ.value=0;mwst.value=19;freeHonor.value=0;lpSelect.value='all';LPH.forEach(x=>{document.querySelector(`.lp-active[data-lp="${x.nr}"]`).checked=true;document.querySelector(`.lp-pct[data-lp="${x.nr}"]`).value=x.pct});calc()}
 function openModal(){zoneWrap.innerHTML=['I','II','III','IV','V'].map(z=>`<h2>Zone ${z}</h2><table><thead><tr><th>AK</th><th>Basis</th><th>Mittel</th><th>Oben</th></tr></thead><tbody>${HOAI[z].min.map((r,i)=>`<tr><td><strong>${euro(r[0])}</strong></td><td>${euro(r[1])}</td><td>${euro((r[1]+HOAI[z].max[i][1])/2)}</td><td>${euro(HOAI[z].max[i][1])}</td></tr>`).join('')}</tbody></table>`).join('');modal.classList.add('open')}
