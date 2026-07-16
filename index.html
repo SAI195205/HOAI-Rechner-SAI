@@ -1,189 +1,1445 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HOAI-Rechner – Schnabel Architekten Ingenieure</title>
-<style>
-:root{--brand:#d00000;--ink:#fff;--muted:#f1d6d6;--card:rgba(255,255,255,.08);--cardb:rgba(255,255,255,.22);--line:rgba(255,255,255,.18);--print:#111;--pm:#666;--pl:#d8d8d8}
-*{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--brand);color:var(--ink)}
-.wrap{max-width:1180px;margin:auto;padding:22px}.app-head{display:flex;justify-content:space-between;align-items:center;gap:16px}.app-title{font-size:clamp(18px,2.6vw,30px);font-weight:900;letter-spacing:.04em}.badge{border:1px solid var(--cardb);border-radius:999px;padding:7px 11px;font-size:12px}
-.app-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}@media(min-width:1020px){.app-grid{grid-template-columns:460px 1fr}}
-.card{background:var(--card);border:1px solid var(--cardb);border-radius:16px;padding:18px;backdrop-filter:blur(4px)}h1{font-size:22px;margin:0 0 14px}h2{font-size:16px;margin:16px 0 8px}h3{font-size:14px;margin:0 0 8px}p{margin:0}.muted{color:var(--muted)}.lead{font-size:14px;line-height:1.5}
-label{display:block;font-size:14px;margin:8px 0 6px;color:var(--muted)}input[type=number],input[type=text],input[type=date],select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--cardb);background:rgba(255,255,255,.09);color:#fff;font-size:14px;outline:none}select,select option{background:#b80000;color:#fff}
-input::file-selector-button{border:0;background:#fff;color:#b00000;padding:8px 12px;border-radius:8px;font-weight:700;margin-right:10px;cursor:pointer}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}@media(max-width:760px){.row,.row3{grid-template-columns:1fr}}
-.btnbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:10px;border:1px solid #fff;background:#fff;color:#d00000;font-weight:900;text-transform:uppercase;cursor:pointer}.btn.secondary{background:transparent;color:#fff}.btn.ghost{background:rgba(255,255,255,.08);color:#fff}
-.hint{margin-top:14px;padding:12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:13px;line-height:1.5}.hr{height:1px;background:var(--line);margin:16px 0}.small{font-size:12px}
-.logo-preview-wrap{display:flex;align-items:center;justify-content:center;min-height:110px;border:1px dashed rgba(255,255,255,.28);border-radius:12px;background:rgba(255,255,255,.04);padding:12px;overflow:hidden}#logoPreview{max-width:100%;max-height:90px;object-fit:contain;display:none}
-.lp-grid{display:grid;gap:10px}.lp-item{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:10px;align-items:center;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(255,255,255,.04)}.lp-check{display:flex;align-items:center;gap:10px;color:#fff;margin:0}.lp-check input{width:auto;margin:0}.lp-pct-wrap{display:flex;align-items:center;gap:8px}.lp-pct-wrap input{padding:10px 12px}
-.report-shell{padding:0}.report-screen-head{padding:18px 18px 0}.report-stack{display:flex;flex-direction:column;gap:18px;padding:18px}.report-page{background:#fff;color:var(--print);border-radius:14px;padding:18mm 18mm 18mm;box-shadow:0 10px 30px rgba(0,0,0,.18);min-height:297mm;position:relative;overflow:hidden}.report-top{display:grid;grid-template-columns:1fr 220px;gap:18px}.report-logo-box{min-height:70px;display:flex;justify-content:flex-end}.report-logo-box img{max-width:220px;max-height:80px;object-fit:contain;display:none}
-.report-title{font-size:26px;font-weight:900;line-height:1.1;margin-bottom:8px}.report-subtitle{color:var(--pm);font-size:14px;line-height:1.5}.report-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:16px;padding:14px 0;border-top:1px solid var(--pl);border-bottom:1px solid var(--pl)}.mk{font-size:12px;color:var(--pm);margin-bottom:3px}.mv{font-size:14px;font-weight:600}
-.report-sum{margin-top:14px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.report-total-box,.report-block{border:1px solid var(--pl);border-radius:12px;padding:14px;background:#fafafa}.report-total-box .k{font-size:12px;color:var(--pm);margin-bottom:5px}.report-total-box .v{font-size:32px;font-weight:900;line-height:1.05}.report-notice{font-size:13px;line-height:1.55;color:#333}
-table{width:100%;border-collapse:collapse}.report-table{font-size:13px;margin-top:14px}.report-table th,.report-table td{padding:8px;border-bottom:1px solid var(--pl);text-align:right;vertical-align:top}.report-table th:first-child,.report-table td:first-child{text-align:left}
-.report-block{margin-top:14px;background:#fff;page-break-inside:avoid}.report-block h3{font-size:14px;margin-bottom:8px}.formula{font-size:12px;line-height:1.55;color:#222}.formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-top:8px}.formula-item{border-top:1px solid #eee;padding-top:6px;font-size:12px;line-height:1.45}.formula-item b{display:block;margin-bottom:2px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-word}
-.report-footer{position:absolute;left:18mm;right:18mm;bottom:12mm;padding-top:8px;border-top:1px solid var(--pl);font-size:11px;color:var(--pm);display:flex;justify-content:space-between}.page-no:after{content:"Seite 1"}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modal .box{background:#fff;color:#111;max-width:1100px;width:100%;max-height:90vh;overflow:auto;border-radius:14px}.modal .head{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}.modal .cnt{padding:12px 16px 20px}.modal table{font-size:14px}.modal th,.modal td{padding:9px;border-bottom:1px solid #eee;text-align:right}.modal th:first-child,.modal td:first-child{text-align:left}
-@media print{@page{size:A4 portrait;margin:0}html,body{background:#fff!important;width:210mm}.app-head,.control-card,.report-screen-head,.modal{display:none!important}.wrap{max-width:none;margin:0;padding:0}.app-grid{display:block;margin:0}.preview-card{border:0!important;background:#fff!important;padding:0!important}.report-stack{display:block;padding:0}.report-page{width:210mm;height:297mm;min-height:297mm;margin:0;border-radius:0;box-shadow:none;padding:18mm 18mm 18mm;overflow:hidden;page-break-after:always;break-after:page}.report-page:last-child{page-break-after:auto;break-after:auto}.report-page *{color:#111!important}.report-top,.report-meta,.report-sum,.report-table,.report-block{page-break-inside:avoid;break-inside:avoid}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HOAI-Rechner – Schnabel Architekten Ingenieure</title>
+
+  <style>
+    :root{
+      --brand:#d00000;
+      --ink:#ffffff;
+      --muted:#f1d6d6;
+      --card:rgba(255,255,255,.08);
+      --cardb:rgba(255,255,255,.22);
+      --line:rgba(255,255,255,.18);
+      --print-ink:#111;
+      --print-muted:#666;
+      --print-line:#d8d8d8;
+      --print-soft:#f7f7f7;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--brand);
+      color:var(--ink);
+    }
+
+    .wrap{max-width:1400px;margin:0 auto;padding:22px}
+
+    .app-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .app-title{
+      font-size:clamp(18px,2.6vw,30px);
+      font-weight:900;
+      letter-spacing:.04em;
+      line-height:1.1;
+    }
+
+    .badge{
+      border:1px solid var(--cardb);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .app-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+
+    @media(min-width:1020px){
+      .app-grid{grid-template-columns:460px 1fr}
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--cardb);
+      border-radius:16px;
+      padding:18px;
+      backdrop-filter:blur(4px);
+    }
+
+    h1{font-size:22px;margin:0 0 14px}
+    h2{font-size:16px;margin:16px 0 8px}
+    h3{font-size:14px;margin:0 0 8px}
+    p{margin:0}
+
+    .muted{color:var(--muted)}
+    .lead{font-size:14px;line-height:1.5}
+    .small{font-size:12px}
+
+    label{
+      display:block;
+      font-size:14px;
+      margin:8px 0 6px;
+      color:var(--muted);
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="date"],
+    select{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid var(--cardb);
+      background:rgba(255,255,255,.09);
+      color:#fff;
+      font-size:14px;
+      outline:none;
+    }
+
+    select{background:#b80000}
+    select option{background:#b80000;color:#fff}
+
+    input::file-selector-button{
+      border:none;
+      background:#fff;
+      color:#b00000;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:700;
+      margin-right:10px;
+      cursor:pointer;
+    }
+
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+    @media(max-width:760px){
+      .row,.row3{grid-template-columns:1fr}
+    }
+
+    .btnbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 16px;
+      border-radius:10px;
+      border:1px solid #fff;
+      background:#fff;
+      color:#d00000;
+      font-weight:900;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+
+    .btn.secondary{background:transparent;color:#fff}
+    .btn.ghost{background:rgba(255,255,255,.08);color:#fff}
+
+    .hint{
+      margin-top:14px;
+      padding:12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .hr{height:1px;background:var(--line);margin:16px 0}
+
+    .logo-preview-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:110px;
+      border:1px dashed rgba(255,255,255,.28);
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      padding:12px;
+      overflow:hidden;
+    }
+
+    #logoPreview{
+      max-width:100%;
+      max-height:90px;
+      object-fit:contain;
+      display:none;
+    }
+
+    .lp-grid{display:grid;gap:10px}
+
+    .lp-item{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 110px;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:10px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .lp-check{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#fff;
+      margin:0;
+    }
+
+    .lp-check input{width:auto;margin:0}
+
+    .lp-pct-wrap{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .lp-pct-wrap input{padding:10px 12px}
+
+    .report-shell{padding:0}
+    .report-screen-head{padding:18px 18px 0}
+
+    .report-stack{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:22px;
+      padding:22px;
+      overflow-x:auto;
+      background:rgba(0,0,0,.10);
+    }
+
+    .report-page{
+      flex:0 0 auto;
+      width:210mm;
+      height:297mm;
+      min-height:297mm;
+      background:#fff;
+      color:var(--print-ink);
+      border-radius:3px;
+      padding:17mm 17mm 17mm;
+      box-shadow:0 12px 34px rgba(0,0,0,.28);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .report-top{
+      display:grid;
+      grid-template-columns:1fr 220px;
+      gap:18px;
+      align-items:start;
+    }
+
+    .report-logo-box{
+      min-height:70px;
+      display:flex;
+      justify-content:flex-end;
+      align-items:flex-start;
+    }
+
+    .report-logo{
+      max-width:220px;
+      max-height:80px;
+      object-fit:contain;
+      display:none;
+    }
+
+    .report-title{
+      font-size:26px;
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:8px;
+      color:#111;
+    }
+
+    .report-subtitle{
+      color:var(--print-muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .report-meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 18px;
+      margin-top:16px;
+      padding:14px 0;
+      border-top:1px solid var(--print-line);
+      border-bottom:1px solid var(--print-line);
+    }
+
+    .mk{font-size:12px;color:var(--print-muted);margin-bottom:3px}
+    .mv{font-size:14px;color:#111;font-weight:600}
+
+    .report-sum{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .report-total-box{
+      border:1px solid var(--print-line);
+      border-radius:12px;
+      padding:16px;
+      background:var(--print-soft);
+    }
+
+    .report-total-box .k{
+      font-size:12px;
+      color:var(--print-muted);
+      margin-bottom:5px;
+    }
+
+    .report-total-box .v{
+      font-size:32px;
+      font-weight:900;
+      color:#111;
+      line-height:1.05;
+    }
+
+    .report-notice{
+      border:1px solid var(--print-line);
+      border-radius:12px;
+      padding:14px;
+      font-size:13px;
+      line-height:1.55;
+      color:#333;
+      background:#fff;
+    }
+
+    .report-table{
+      width:100%;
+      border-collapse:collapse;
+      color:#111;
+      font-size:13px;
+      margin-top:14px;
+    }
+
+    .report-table th,
+    .report-table td{
+      padding:7px 8px;
+      border-bottom:1px solid var(--print-line);
+      text-align:right;
+      vertical-align:top;
+      line-height:1.3;
+    }
+
+    .report-table th:first-child,
+    .report-table td:first-child{text-align:left}
+
+    .report-table tfoot td{
+      border-top:2px solid #111;
+      border-bottom:none;
+      padding-top:11px;
+    }
+
+    .report-block{
+      margin-top:14px;
+      border:1px solid var(--print-line);
+      border-radius:12px;
+      padding:12px 14px;
+      background:#fff;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+
+    .report-block h3{
+      color:#111;
+      font-size:14px;
+      font-weight:800;
+      margin:0 0 8px;
+    }
+
+    .formula{
+      font-size:12px;
+      line-height:1.55;
+      color:#222;
+    }
+
+    .formula-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px 16px;
+      margin-top:8px;
+    }
+
+    .formula-item{
+      border-top:1px solid #eee;
+      padding-top:6px;
+      font-size:12px;
+      line-height:1.45;
+      color:#222;
+    }
+
+    .formula-item b{
+      display:block;
+      margin-bottom:2px;
+      color:#111;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      word-break:break-word;
+    }
+
+    .report-footer{
+      position:absolute;
+      left:18mm;
+      right:18mm;
+      bottom:10mm;
+      padding-top:8px;
+      border-top:1px solid var(--print-line);
+      font-size:11px;
+      color:var(--print-muted);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.5);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+      z-index:10;
+    }
+
+    .modal.open{display:flex}
+
+    .modal .box{
+      background:#fff;
+      color:#111;
+      max-width:1100px;
+      width:100%;
+      max-height:90vh;
+      overflow:auto;
+      border-radius:14px;
+    }
+
+    .modal .head{
+      position:sticky;
+      top:0;
+      background:#fff;
+      border-bottom:1px solid #eee;
+      padding:12px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      z-index:2;
+    }
+
+    .modal .cnt{padding:12px 16px 20px}
+
+    .modal table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+    }
+
+    .modal th,.modal td{
+      padding:9px;
+      border-bottom:1px solid #eee;
+      text-align:right;
+    }
+
+    .modal th:first-child,.modal td:first-child{text-align:left}
+
+    @media print{
+      @page{size:A4 portrait;margin:0}
+
+      html,body{
+        background:#fff !important;
+        width:210mm;
+      }
+
+      body{
+        color:#111 !important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+      }
+
+      .app-head,
+      .control-card,
+      .report-screen-head,
+      .modal{
+        display:none !important;
+      }
+
+      .wrap{max-width:none;margin:0;padding:0}
+      .app-grid{display:block;margin:0}
+
+      .preview-card{
+        border:none !important;
+        background:#fff !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+
+      .report-stack{display:block;padding:0}
+
+      .report-page{
+        width:210mm;
+        height:297mm;
+        min-height:297mm;
+        margin:0;
+        border-radius:0;
+        box-shadow:none;
+        padding:17mm 17mm 17mm;
+        overflow:visible;
+        page-break-after:always;
+        break-after:page;
+      }
+
+      .report-page:last-child{
+        page-break-after:auto;
+        break-after:auto;
+      }
+
+      .report-page *{color:#111 !important}
+
+      .report-subtitle,
+      .mk,
+      .report-total-box .k,
+      .report-footer{
+        color:#666 !important;
+      }
+
+      .report-top,
+      .report-meta,
+      .report-sum,
+      .report-table,
+      .report-block{
+        break-inside:avoid;
+        page-break-inside:avoid;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header class="wrap app-head"><div class="app-title">HOAI-Rechner – Schnabel Architekten Ingenieure</div><div class="badge" id="stamp">Stand: heute</div></header>
-<main class="wrap app-grid">
-<section class="card control-card">
-<h1>Eingaben</h1>
-<p class="lead muted">HOAI-Rechner für Gebäude und Innenräume mit automatischer Ermittlung der anrechenbaren Kosten aus KG 300 und KG 400.</p>
+  <header class="wrap app-head">
+    <div class="app-title">HOAI-Rechner – Schnabel Architekten Ingenieure</div>
+    <div class="badge" id="stamp">Stand: heute</div>
+  </header>
 
-<h2>Projektangaben</h2>
-<div class="row">
-<div><label for="projectName">Projektname</label><input id="projectName" type="text" value="Projekt Musterbau" oninput="calc()"></div>
-<div><label for="projectDate">Datum</label><input id="projectDate" type="date" oninput="calc()"></div>
-</div>
-<div class="row">
-<div><label for="clientName">Bauherr / Auftraggeber</label><input id="clientName" type="text" value="Max Mustermann" oninput="calc()"></div>
-<div><label for="projectType">Gebäudetyp / Notiz</label><input id="projectType" type="text" value="Gebäude und Innenräume" oninput="calc()"></div>
-</div>
+  <main class="wrap app-grid">
+    <section class="card control-card">
+      <h1>Eingaben</h1>
+      <p class="lead muted">
+        HOAI-Rechner für Gebäude und Innenräume mit automatischer Ermittlung der anrechenbaren Kosten aus KG 300 und KG 400.
+      </p>
 
-<h2>Logo</h2>
-<div class="row">
-<div><label for="logoUpload">Logo hochladen</label><input id="logoUpload" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp" onchange="handleLogoUpload(event)"></div>
-<div><label>&nbsp;</label><button class="btn ghost" type="button" onclick="clearLogo()">Logo entfernen</button></div>
-</div>
-<div class="logo-preview-wrap" style="margin-top:8px"><img id="logoPreview" alt="Logo-Vorschau"><div id="logoPlaceholder" class="small muted">Kein Logo hinterlegt</div></div>
+      <h2>Projektangaben</h2>
 
-<div class="hr"></div>
-<h2>Anrechenbare Kosten</h2>
-<div class="row">
-<div><label for="kg300">KG 300 – Baukonstruktion (€)</label><input id="kg300" type="number" min="0" step="1000" value="500000" oninput="calc()"></div>
-<div><label for="kg400">KG 400 – Technische Anlagen (€)</label><input id="kg400" type="number" min="0" step="1000" value="200000" oninput="calc()"></div>
-</div>
-<div class="hint">
-<label class="lp-check"><input id="kg400Full" type="checkbox" onchange="calc()"> KG 400 vollständig anrechnen</label>
-<div style="margin-top:8px">Ohne Häkchen wird KG 400 automatisch nach § 33 Abs. 2 HOAI berücksichtigt: bis 25 % der sonstigen anrechenbaren Kosten vollständig, der darüber liegende Betrag zur Hälfte.</div>
-</div>
-<div class="hint"><strong>Ermittelte anrechenbare Kosten:</strong> <span id="akPreview">–</span><br><span id="akFormulaPreview" class="small">–</span></div>
+      <div class="row">
+        <div>
+          <label for="projectName">Projektname</label>
+          <input id="projectName" type="text" value="Projekt Musterbau" oninput="calc()">
+        </div>
+        <div>
+          <label for="projectDate">Datum</label>
+          <input id="projectDate" type="date" oninput="calc()">
+        </div>
+      </div>
 
-<h2>HOAI-Berechnung</h2>
-<div class="row">
-<div><label for="zone">Honorarzone</label><select id="zone" onchange="calc()"><option>I</option><option>II</option><option selected>III</option><option>IV</option><option>V</option></select></div>
-<div><label for="korridor">Honorarsatz</label><select id="korridor" onchange="calc()"><option value="min">Basishonorarsatz</option><option value="mid" selected>Mittelsatz</option><option value="max">Oberer Honorarsatz</option></select></div>
-</div>
-<div class="row3">
-<div><label for="umbauZ">Umbauzuschlag (%)</label><input id="umbauZ" type="number" min="0" step="1" value="0" oninput="calc()"></div>
-<div><label for="mwst">MwSt. (%)</label><input id="mwst" type="number" min="0" step="1" value="19" oninput="calc()"></div>
-<div><label for="freeHonor">Freier Zuschlag (%)</label><input id="freeHonor" type="number" min="0" step=".1" value="0" oninput="calc()"></div>
-</div>
-<div><label for="lpSelect">Leistungsphasen</label><select id="lpSelect" onchange="calc()"><option value="all" selected>LPH 1–9 gesamt</option><option value="custom">Eigene Auswahl und Prozentsätze</option></select></div>
+      <div class="row">
+        <div>
+          <label for="clientName">Bauherr / Auftraggeber</label>
+          <input id="clientName" type="text" value="Max Mustermann" oninput="calc()">
+        </div>
+        <div>
+          <label for="projectType">Gebäudetyp / Notiz</label>
+          <input id="projectType" type="text" value="Gebäude und Innenräume" oninput="calc()">
+        </div>
+      </div>
 
-<div id="lpWrap" class="hint" style="display:none">
-<div class="lp-grid" id="lpGrid"></div>
-</div>
+      <h2>Logo</h2>
 
-<div class="btnbar"><button class="btn" type="button" onclick="window.print()">PDF / Drucken</button><button class="btn secondary" type="button" onclick="openModal()">HOAI-Tabelle</button><button class="btn secondary" type="button" onclick="resetForm()">Zurücksetzen</button></div><div class="hint">PDF-Tipp: Im Druckdialog A4, Hochformat, 100 % Skalierung und möglichst keine Browser-Kopf-/Fußzeilen wählen.</div>
-</section>
+      <div class="row">
+        <div>
+          <label for="logoUpload">Logo hochladen</label>
+          <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp" onchange="handleLogoUpload(event)">
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button class="btn ghost" type="button" onclick="clearLogo()">Logo entfernen</button>
+        </div>
+      </div>
 
-<section class="card preview-card report-shell">
-<div class="report-screen-head"><h1>Berichtsvorschau</h1><p class="lead muted">Der Bericht wird bewusst auf zwei A4-Seiten ausgegeben.</p></div>
-<div class="report-stack">
+      <div class="logo-preview-wrap" style="margin-top:8px">
+        <img id="logoPreview" alt="Logo-Vorschau">
+        <div id="logoPlaceholder" class="small muted">Kein Logo hinterlegt</div>
+      </div>
 
-<article class="report-page">
-<div class="report-top"><div><div class="report-title">HOAI-Honorarermittlung</div><div class="report-subtitle">Zusammenfassung der Honorarberechnung für Gebäude und Innenräume.</div></div><div class="report-logo-box"><img class="reportLogo" alt="Logo"></div></div>
-<section class="report-meta">
-<div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
-<div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
-<div><div class="mk">Bauherr / Auftraggeber</div><div class="mv rClient">–</div></div>
-<div><div class="mk">Gebäudetyp / Notiz</div><div class="mv rType">–</div></div>
-</section>
-<section class="report-sum">
-<div class="report-total-box"><div class="k">Anrechenbare Kosten</div><div class="v rAkTotal">–</div></div>
-<div class="report-notice"><strong>Grundlage:</strong> Honorarzone <span class="rZone">–</span>, <span class="rCorridor">–</span>.<br>Umbauzuschlag: <span class="rUmbau">–</span>; freier Zuschlag: <span class="rFree">–</span>.<br>Leistungsphasenanteil: <span class="rLpPct">–</span>.</div>
-</section>
-<section class="report-block"><h3>Ermittlung der anrechenbaren Kosten</h3><div class="formula akReportFormula">–</div></section>
-<table class="report-table"><thead><tr><th>Zusammenfassung</th><th>Wert</th></tr></thead><tbody id="summaryRows"></tbody><tfoot><tr><td><strong>Honorar brutto</strong></td><td class="rGrossTotal"><strong>–</strong></td></tr></tfoot></table>
-<footer class="report-footer"><div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 1 von 2</div></footer>
-</article>
+      <div class="hr"></div>
 
-<article class="report-page">
-<div class="report-top"><div><div class="report-title">Berechnungsnachweis</div><div class="report-subtitle">Detaillierte Herleitung der anrechenbaren Kosten und des Tabellenhonorars.</div></div><div class="report-logo-box"><img class="reportLogo" alt="Logo"></div></div>
-<section class="report-meta">
-<div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
-<div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
-<div><div class="mk">Honorarzone</div><div class="mv rZone">–</div></div>
-<div><div class="mk">Honorarsatz</div><div class="mv rCorridor">–</div></div>
-</section>
-<table class="report-table"><thead><tr><th>Berechnungsposition</th><th>Wert</th></tr></thead><tbody id="detailRows"></tbody></table>
-<section class="report-block"><h3>Formel der anrechenbaren Kosten</h3><div class="formula akReportFormula">–</div></section>
-<section class="report-block"><h3>Interpolationsnachweis</h3><div class="formula" id="interpSummary">–</div><div class="formula-grid">
-<div class="formula-item"><b>Unterer Tabellenpunkt</b><div id="interpLow" class="mono">–</div></div>
-<div class="formula-item"><b>Oberer Tabellenpunkt</b><div id="interpHigh" class="mono">–</div></div>
-<div class="formula-item"><b>Interpolationsfaktor</b><div id="interpT" class="mono">–</div></div>
-<div class="formula-item"><b>Rechnung</b><div id="interpFormula" class="mono">–</div></div>
-</div></section>
-<section class="report-block"><h3>Ausgewählte Leistungsphasen</h3><div class="formula" id="selectedLphReport">–</div></section>
-<footer class="report-footer"><div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 2 von 2</div></footer>
-</article>
+      <h2>Anrechenbare Kosten</h2>
 
-</div>
-</section>
-</main>
+      <div class="row">
+        <div>
+          <label for="kg300">KG 300 – Baukonstruktion (€)</label>
+          <input id="kg300" type="number" min="0" step="1000" value="500000" oninput="calc()">
+        </div>
+        <div>
+          <label for="kg400">KG 400 – Technische Anlagen (€)</label>
+          <input id="kg400" type="number" min="0" step="1000" value="200000" oninput="calc()">
+        </div>
+      </div>
 
-<div class="modal" id="modal"><div class="box"><div class="head"><strong style="color:#d00000">HOAI 2021 – Honorartafel Gebäude & Innenräume</strong><button class="btn" onclick="closeModal()">Schließen</button></div><div class="cnt"><div id="zoneWrap"></div></div></div></div>
+      <div class="hint">
+        <label class="lp-check">
+          <input id="kg400Full" type="checkbox" onchange="calc()">
+          KG 400 vollständig anrechnen
+        </label>
+        <div style="margin-top:8px">
+          Ohne Häkchen wird KG 400 automatisch berücksichtigt: bis 25 % der sonstigen anrechenbaren Kosten vollständig, der darüber liegende Betrag zur Hälfte.
+        </div>
+      </div>
 
-<script>
-const LOGO_KEY='schnabel_hoai_logo_v3';
-const HOAI={
-"I":{min:[[25000,3120],[35000,4217],[50000,5804],[75000,8342],[100000,10790],[150000,15500],[200000,20037],[300000,28750],[500000,45232],[750000,64666],[1000000,83182],[1500000,119307],[2000000,153965],[3000000,220161],[5000000,343879],[7500000,493923],[10000000,638277],[15000000,915129],[20000000,1180414],[25000000,1436874]],max:[[25000,3657],[35000,4942],[50000,6801],[75000,9776],[100000,12644],[150000,18164],[200000,23480],[300000,33692],[500000,53006],[750000,75781],[1000000,97479],[1500000,139813],[2000000,180428],[3000000,258002],[5000000,402984],[7500000,578816],[10000000,747981],[15000000,1072416],[20000000,1383298],[25000000,1683837]]},
-"II":{min:[[25000,3657],[35000,4942],[50000,6801],[75000,9776],[100000,12644],[150000,18164],[200000,23480],[300000,33692],[500000,53006],[750000,75781],[1000000,97479],[1500000,139813],[2000000,180428],[3000000,258002],[5000000,402984],[7500000,578816],[10000000,747981],[15000000,1072416],[20000000,1383298],[25000000,1683837]],max:[[25000,4339],[35000,5865],[50000,8071],[75000,11601],[100000,15005],[150000,21555],[200000,27863],[300000,39981],[500000,62900],[750000,89927],[1000000,115675],[1500000,165911],[2000000,214108],[3000000,306162],[5000000,478207],[7500000,686862],[10000000,887604],[15000000,1272601],[20000000,1641513],[25000000,1998153]]},
-"III":{min:[[25000,4339],[35000,5865],[50000,8071],[75000,11601],[100000,15005],[150000,21555],[200000,27863],[300000,39981],[500000,62900],[750000,89927],[1000000,115675],[1500000,165911],[2000000,214108],[3000000,306162],[5000000,478207],[7500000,686862],[10000000,887604],[15000000,1272601],[20000000,1641513],[25000000,1998153]],max:[[25000,5412],[35000,7315],[50000,10066],[75000,14469],[100000,18713],[150000,26883],[200000,34751],[300000,49864],[500000,78449],[750000,112156],[1000000,144268],[1500000,206923],[2000000,267034],[3000000,381843],[5000000,596416],[7500000,856648],[10000000,1107012],[15000000,1587176],[20000000,2047281],[25000000,2492079]]},
-"IV":{min:[[25000,5412],[35000,7315],[50000,10066],[75000,14469],[100000,18713],[150000,26883],[200000,34751],[300000,49864],[500000,78449],[750000,112156],[1000000,144268],[1500000,206923],[2000000,267034],[3000000,381843],[5000000,596416],[7500000,856648],[10000000,1107012],[15000000,1587176],[20000000,2047281],[25000000,2492079]],max:[[25000,6094],[35000,8237],[50000,11336],[75000,16293],[100000,21074],[150000,30274],[200000,39134],[300000,56153],[500000,88343],[750000,126301],[1000000,162464],[1500000,233022],[2000000,300714],[3000000,430003],[5000000,671640],[7500000,964694],[10000000,1246635],[15000000,1787360],[20000000,2305496],[25000000,2806395]]},
-"V":{min:[[25000,6094],[35000,8237],[50000,11336],[75000,16293],[100000,21074],[150000,30274],[200000,39134],[300000,56153],[500000,88343],[750000,126301],[1000000,162464],[1500000,233022],[2000000,300714],[3000000,430003],[5000000,671640],[7500000,964694],[10000000,1246635],[15000000,1787360],[20000000,2305496],[25000000,2806395]],max:[[25000,6631],[35000,8962],[50000,12333],[75000,17727],[100000,22928],[150000,32938],[200000,42578],[300000,61095],[500000,96118],[750000,137416],[1000000,176761],[1500000,253527],[2000000,327177],[3000000,467843],[5000000,730744],[7500000,1049587],[10000000,1356339],[15000000,1944648],[20000000,2508380],[25000000,3053358]]}
-};
-const LPH=[{nr:1,name:'Grundlagenermittlung',pct:2},{nr:2,name:'Vorplanung',pct:7},{nr:3,name:'Entwurfsplanung',pct:15},{nr:4,name:'Genehmigungsplanung',pct:3},{nr:5,name:'Ausführungsplanung',pct:25},{nr:6,name:'Vorbereitung der Vergabe',pct:10},{nr:7,name:'Mitwirkung bei der Vergabe',pct:4},{nr:8,name:'Objektüberwachung',pct:32},{nr:9,name:'Objektbetreuung',pct:2}];
+      <div class="hint">
+        <strong>Ermittelte anrechenbare Kosten:</strong>
+        <span id="akPreview">–</span><br>
+        <span id="akFormulaPreview" class="small">–</span>
+      </div>
 
-function euro(n){return (isFinite(n)?n:0).toLocaleString('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0})}
-function euroDec(n){return (isFinite(n)?n:0).toLocaleString('de-DE',{style:'currency',currency:'EUR',minimumFractionDigits:2,maximumFractionDigits:2})}
-function pct(n,d=1){return (isFinite(n)?n:0).toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d})+' %'}
-function num(n,d=6){return (isFinite(n)?n:0).toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d})}
-function corridorLabel(v){return v==='min'?'Basishonorarsatz':v==='max'?'Oberer Honorarsatz':'Mittelsatz'}
-function formatDate(v){return v?new Date(v+'T00:00:00').toLocaleDateString('de-DE'):'–'}
-function setToday(){const e=document.getElementById('projectDate');if(!e.value)e.value=new Date().toISOString().slice(0,10)}
-function buildLp(){document.getElementById('lpGrid').innerHTML=LPH.map(x=>`<div class="lp-item"><label class="lp-check"><input type="checkbox" class="lp-active" data-lp="${x.nr}" checked onchange="calc()"> LPH ${x.nr} ${x.name}</label><div class="lp-pct-wrap"><input type="number" class="lp-pct" data-lp="${x.nr}" value="${x.pct}" min="0" step=".1" oninput="calc()"><span>%</span></div></div>`).join('')}
-function lpPercent(){if(document.getElementById('lpSelect').value==='all')return 100;return [...document.querySelectorAll('.lp-active:checked')].reduce((s,e)=>s+(+document.querySelector(`.lp-pct[data-lp="${e.dataset.lp}"]`).value||0),0)}
-function calcAK(){
- const kg300=+document.getElementById('kg300').value||0,kg400=+document.getElementById('kg400').value||0,full=document.getElementById('kg400Full').checked;
- if(full)return{kg300,kg400,limit:kg400,above:0,kg400AK:kg400,ak:kg300+kg400,formula:`KG 300 ${euro(kg300)} + KG 400 vollständig ${euro(kg400)} = ${euro(kg300+kg400)}`};
- const limit=Math.min(kg400,kg300*.25),above=Math.max(0,kg400-limit),kg400AK=limit+above*.5,ak=kg300+kg400AK;
- return{kg300,kg400,limit,above,kg400AK,ak,formula:`KG 300 ${euro(kg300)} + KG 400 bis 25 %-Grenze ${euro(limit)} + 50 % des übersteigenden KG-400-Anteils (${euro(above)} × 50 % = ${euro(above*.5)}) = ${euro(ak)}`};
-}
-function curve(zone,k){if(k==='mid')return HOAI[zone].min.map((r,i)=>[r[0],(r[1]+HOAI[zone].max[i][1])/2]);return HOAI[zone][k]}
-function interpolate(zone,ak,k){const c=curve(zone,k);if(ak<=c[0][0])return{honor:c[0][1],exact:true,low:c[0],high:c[0],factor:0};if(ak>=c.at(-1)[0])return{honor:c.at(-1)[1],exact:true,low:c.at(-1),high:c.at(-1),factor:0};for(let i=0;i<c.length-1;i++){const[a1,h1]=c[i],[a2,h2]=c[i+1];if(ak===a1)return{honor:h1,exact:true,low:c[i],high:c[i],factor:0};if(ak===a2)return{honor:h2,exact:true,low:c[i+1],high:c[i+1],factor:0};if(ak>a1&&ak<a2){const t=(ak-a1)/(a2-a1);return{honor:h1+t*(h2-h1),exact:false,low:c[i],high:c[i+1],factor:t}}}}
-function setAll(sel,val){document.querySelectorAll(sel).forEach(el=>el.textContent=val)}
-function selectedLphText(){if(document.getElementById('lpSelect').value==='all')return 'LPH 1–9 vollständig (100,0 %).';const arr=LPH.map(x=>{const a=document.querySelector(`.lp-active[data-lp="${x.nr}"]`),p=document.querySelector(`.lp-pct[data-lp="${x.nr}"]`);return{...x,active:a&&a.checked,current:+((p&&p.value)||0)}}).filter(x=>x.active).map(x=>`LPH ${x.nr} ${x.name}: ${pct(x.current)}`);return arr.length?arr.join(' · '):'Keine Leistungsphase ausgewählt.'}
-function calc(){
- const akData=calcAK(),ak=akData.ak,zone=document.getElementById('zone').value,k=document.getElementById('korridor').value;
- const uz=+document.getElementById('umbauZ').value||0,mwst=+document.getElementById('mwst').value||0,free=+document.getElementById('freeHonor').value||0,lp=lpPercent();
- const ip=interpolate(zone,ak,k),base=ip.honor,umbau=base*uz/100,withUmbau=base+umbau,freeAmt=withUmbau*free/100,withFree=withUmbau+freeAmt,net=withFree*lp/100,vat=net*mwst/100,gross=net+vat;
- document.getElementById('lpWrap').style.display=document.getElementById('lpSelect').value==='custom'?'block':'none';
- document.getElementById('stamp').textContent='Stand: '+new Date().toLocaleDateString('de-DE');
- const project=document.getElementById('projectName').value||'–',client=document.getElementById('clientName').value||'–',type=document.getElementById('projectType').value||'–',date=formatDate(document.getElementById('projectDate').value);
- setAll('.rProject',project);setAll('.rClient',client);setAll('.rType',type);setAll('.rDate',date);setAll('.rAkTotal',euro(ak));setAll('.rGrossTotal',euro(gross));setAll('.rZone',zone);setAll('.rCorridor',corridorLabel(k));setAll('.rUmbau',pct(uz));setAll('.rFree',pct(free));setAll('.rLpPct',pct(lp));setAll('.akReportFormula',akData.formula);
- document.getElementById('akPreview').textContent=euro(ak);document.getElementById('akFormulaPreview').textContent=akData.formula;document.getElementById('selectedLphReport').textContent=selectedLphText();
- const summary=[['KG 300 – Baukonstruktion',euro(akData.kg300)],['KG 400 – Technische Anlagen',euro(akData.kg400)],['Davon KG 400 anrechenbar',euro(akData.kg400AK)],[`Tabellenhonorar (${corridorLabel(k)})`,euro(base)],['Honorar netto',euro(net)],[`MwSt. (${pct(mwst)})`,euro(vat)]];
- document.getElementById('summaryRows').innerHTML=summary.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
- const detail=[['KG 300 – Baukonstruktion',euro(akData.kg300)],['KG 400 – Technische Anlagen',euro(akData.kg400)],['25-%-Grenze bezogen auf KG 300',euro(akData.kg300*.25)],['KG 400 innerhalb der Grenze',euro(akData.limit)],['KG 400 oberhalb der Grenze',euro(akData.above)],['Davon 50 % anrechenbar',euro(akData.above*.5)],['Anrechenbarer Anteil KG 400',euro(akData.kg400AK)],['Anrechenbare Kosten gesamt',euro(ak)],[`Tabellenhonorar (${corridorLabel(k)})`,euro(base)],[`Umbauzuschlag (${pct(uz)})`,euro(umbau)],[`Freier Zuschlag (${pct(free)})`,euro(freeAmt)],['Honorar vor Leistungsphasenanteil',euro(withFree)],[`Leistungsphasenanteil (${pct(lp)})`,euro(net)],[`MwSt. (${pct(mwst)})`,euro(vat)],['Honorar brutto',euro(gross)]];
- document.getElementById('detailRows').innerHTML=detail.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
- const[a1,h1]=ip.low,[a2,h2]=ip.high;document.getElementById('interpSummary').innerHTML=ip.exact?`Für <strong>${euro(ak)}</strong> wird ein direkter Tabellen- oder Randwert angesetzt.`:`Für <strong>${euro(ak)}</strong> wird linear zwischen <strong>${euro(a1)}</strong> und <strong>${euro(a2)}</strong> interpoliert.`;
- document.getElementById('interpLow').textContent=`AK1 = ${euro(a1)} | H1 = ${euroDec(h1)}`;document.getElementById('interpHigh').textContent=`AK2 = ${euro(a2)} | H2 = ${euroDec(h2)}`;
- document.getElementById('interpT').textContent=ip.exact?'Kein Interpolationsschritt erforderlich.':`t = (${euroDec(ak)} − ${euroDec(a1)}) / (${euroDec(a2)} − ${euroDec(a1)}) = ${num(ip.factor)}`;
- document.getElementById('interpFormula').textContent=ip.exact?`Ergebnis = ${euroDec(base)}`:`H = ${euroDec(h1)} + (${euroDec(h2)} − ${euroDec(h1)}) × ${num(ip.factor)} = ${euroDec(base)}`;
-}
-function handleLogoUpload(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=x=>{localStorage.setItem(LOGO_KEY,x.target.result);applyLogo(x.target.result)};r.readAsDataURL(f)}
-function applyLogo(src){const p=document.getElementById('logoPreview'),ph=document.getElementById('logoPlaceholder');p.src=src||'';p.style.display=src?'block':'none';ph.style.display=src?'none':'block';document.querySelectorAll('.reportLogo').forEach(x=>{x.src=src||'';x.style.display=src?'block':'none'})}
-function clearLogo(){localStorage.removeItem(LOGO_KEY);logoUpload.value='';applyLogo('')}
-function resetForm(){projectName.value='Projekt Musterbau';clientName.value='Max Mustermann';projectType.value='Gebäude und Innenräume';kg300.value=500000;kg400.value=200000;kg400Full.checked=false;zone.value='III';korridor.value='mid';umbauZ.value=0;mwst.value=19;freeHonor.value=0;lpSelect.value='all';LPH.forEach(x=>{document.querySelector(`.lp-active[data-lp="${x.nr}"]`).checked=true;document.querySelector(`.lp-pct[data-lp="${x.nr}"]`).value=x.pct});calc()}
-function openModal(){zoneWrap.innerHTML=['I','II','III','IV','V'].map(z=>`<h2>Zone ${z}</h2><table><thead><tr><th>AK</th><th>Basis</th><th>Mittel</th><th>Oben</th></tr></thead><tbody>${HOAI[z].min.map((r,i)=>`<tr><td><strong>${euro(r[0])}</strong></td><td>${euro(r[1])}</td><td>${euro((r[1]+HOAI[z].max[i][1])/2)}</td><td>${euro(HOAI[z].max[i][1])}</td></tr>`).join('')}</tbody></table>`).join('');modal.classList.add('open')}
-function closeModal(){modal.classList.remove('open')}
-document.addEventListener('DOMContentLoaded',()=>{buildLp();setToday();applyLogo(localStorage.getItem(LOGO_KEY));calc()});
-</script>
+      <h2>HOAI-Berechnung</h2>
+
+      <div class="row">
+        <div>
+          <label for="zone">Honorarzone</label>
+          <select id="zone" onchange="calc()">
+            <option>I</option>
+            <option>II</option>
+            <option selected>III</option>
+            <option>IV</option>
+            <option>V</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="korridor">Honorarsatz</label>
+          <select id="korridor" onchange="calc()">
+            <option value="min">Basishonorarsatz</option>
+            <option value="mid" selected>Mittelsatz</option>
+            <option value="max">Oberer Honorarsatz</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row3">
+        <div>
+          <label for="umbauZ">Umbauzuschlag (%)</label>
+          <input id="umbauZ" type="number" min="0" step="1" value="0" oninput="calc()">
+        </div>
+        <div>
+          <label for="mwst">MwSt. (%)</label>
+          <input id="mwst" type="number" min="0" step="1" value="19" oninput="calc()">
+        </div>
+        <div>
+          <label for="freeHonor">Freier Zuschlag (%)</label>
+          <input id="freeHonor" type="number" min="0" step="0.1" value="0" oninput="calc()">
+        </div>
+      </div>
+
+      <div>
+        <label for="lpSelect">Leistungsphasen</label>
+        <select id="lpSelect" onchange="calc()">
+          <option value="all" selected>LPH 1–9 gesamt</option>
+          <option value="custom">Eigene Auswahl und Prozentsätze</option>
+        </select>
+      </div>
+
+      <div id="lpWrap" class="hint" style="display:none">
+        <div class="lp-grid" id="lpGrid"></div>
+      </div>
+
+      <h2>Mehrere im Wesentlichen gleiche Gebäude</h2>
+
+      <div class="hint">
+        <label class="lp-check">
+          <input id="repeatRule" type="checkbox" onchange="calc()">
+          Wiederholungsregel anwenden
+        </label>
+
+        <div class="row" style="margin-top:8px">
+          <div>
+            <label for="buildingCount">Anzahl gleichartiger Gebäude (inkl. Erstgebäude)</label>
+            <input id="buildingCount" type="number" min="1" step="1" value="1" oninput="calc()">
+          </div>
+
+          <div>
+            <label for="repeatMode">Berechnungsart</label>
+            <select id="repeatMode" onchange="calc()">
+              <option value="hoai" selected>HOAI-Staffel nach § 11 Abs. 3</option>
+              <option value="custom">Eigener Wiederholungsanteil</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="customRepeatWrap" style="display:none;margin-top:8px">
+          <label for="customRepeatPct">Anteil je weiterem Gebäude für LPH 1–6 (%)</label>
+          <input id="customRepeatPct" type="number" min="0" step="0.1" value="25" oninput="calc()">
+        </div>
+
+        <div class="hint" style="margin-top:10px">
+          <strong id="repeatPreview">1 Gebäude = 100 %</strong>
+        </div>
+
+        <div id="repeatRuleNote" style="margin-top:8px">
+          HOAI-Staffel für LPH 1–6: erste bis vierte Wiederholung 50 %, fünfte bis siebte Wiederholung 40 %, ab der achten Wiederholung 10 %. LPH 7–9 werden je Gebäude ungemindert angesetzt.
+        </div>
+      </div>
+
+      <div class="btnbar">
+        <button class="btn" type="button" onclick="window.print()">PDF / Drucken</button>
+        <button class="btn secondary" type="button" onclick="openModal()">HOAI-Tabelle</button>
+        <button class="btn secondary" type="button" onclick="resetForm()">Zurücksetzen</button>
+      </div>
+
+      <div class="hint">
+        Für die PDF-Ausgabe: A4, Hochformat, Skalierung 100 %, Browser-Kopf- und Fußzeilen ausschalten.
+      </div>
+    </section>
+
+    <section class="card preview-card report-shell">
+      <div class="report-screen-head">
+        <h1>Berichtsvorschau</h1>
+        <p class="lead muted">Der Bericht ist auf drei feste A4-Seiten verteilt: Übersicht, Berechnungsdetails und Interpolationsnachweis.</p>
+      </div>
+
+      <div class="report-stack">
+
+        <!-- SEITE 1: ÜBERSICHT -->
+        <article class="report-page">
+          <div class="report-top">
+            <div>
+              <div class="report-title">HOAI-Honorarermittlung</div>
+              <div class="report-subtitle">Kompakte Zusammenfassung der Honorarberechnung für Gebäude und Innenräume.</div>
+            </div>
+            <div class="report-logo-box"><img class="report-logo" alt="Logo"></div>
+          </div>
+
+          <section class="report-meta">
+            <div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
+            <div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
+            <div><div class="mk">Bauherr / Auftraggeber</div><div class="mv rClient">–</div></div>
+            <div><div class="mk">Gebäudetyp / Notiz</div><div class="mv rType">–</div></div>
+          </section>
+
+          <section class="report-sum">
+            <div class="report-total-box">
+              <div class="k">Anrechenbare Kosten</div>
+              <div class="v rAkTotal">–</div>
+            </div>
+            <div class="report-notice">
+              <strong>Grundlage:</strong><br>
+              Honorarzone <span class="rZone">–</span>, <span class="rCorridor">–</span>.<br>
+              Umbauzuschlag: <span class="rUmbau">–</span><br>
+              Freier Zuschlag: <span class="rFree">–</span><br>
+              Leistungsphasenanteil je Gebäude: <span class="rLpPct">–</span><br>
+              Wiederholungsregel: <span class="rRepeat">nicht angewendet</span>
+            </div>
+          </section>
+
+          <table class="report-table">
+            <thead><tr><th>Zusammenfassung</th><th>Wert</th></tr></thead>
+            <tbody id="summaryRows"></tbody>
+            <tfoot><tr><td><strong>Honorar brutto</strong></td><td class="rGrossTotal"><strong>–</strong></td></tr></tfoot>
+          </table>
+
+          <footer class="report-footer">
+            <div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 1 von 3</div>
+          </footer>
+        </article>
+
+        <!-- SEITE 2: BERECHNUNGSDETAILS -->
+        <article class="report-page">
+          <div class="report-top">
+            <div>
+              <div class="report-title">Berechnungsdetails</div>
+              <div class="report-subtitle">Herleitung der anrechenbaren Kosten, Zuschläge und Leistungsphasen.</div>
+            </div>
+            <div class="report-logo-box"><img class="report-logo" alt="Logo"></div>
+          </div>
+
+          <section class="report-meta">
+            <div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
+            <div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
+            <div><div class="mk">Anrechenbare Kosten</div><div class="mv rAkTotal">–</div></div>
+            <div><div class="mk">Gleichartige Gebäude</div><div class="mv rRepeat">nicht angewendet</div></div>
+          </section>
+
+          <section class="report-block">
+            <h3>Ermittlung der anrechenbaren Kosten</h3>
+            <div class="formula akReportFormula">–</div>
+          </section>
+
+          <table class="report-table">
+            <thead><tr><th>Berechnungsposition</th><th>Wert</th></tr></thead>
+            <tbody id="detailRows"></tbody>
+          </table>
+
+          <section class="report-block">
+            <h3>Ausgewählte Leistungsphasen</h3>
+            <div class="formula" id="selectedLphReport">–</div>
+          </section>
+
+          <footer class="report-footer">
+            <div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 2 von 3</div>
+          </footer>
+        </article>
+
+        <!-- SEITE 3: INTERPOLATION -->
+        <article class="report-page">
+          <div class="report-top">
+            <div>
+              <div class="report-title">Interpolationsnachweis</div>
+              <div class="report-subtitle">Lineare Interpolation des Tabellenhonorars.</div>
+            </div>
+            <div class="report-logo-box"><img class="report-logo" alt="Logo"></div>
+          </div>
+
+          <section class="report-meta">
+            <div><div class="mk">Projekt</div><div class="mv rProject">–</div></div>
+            <div><div class="mk">Datum</div><div class="mv rDate">–</div></div>
+            <div><div class="mk">Anrechenbare Kosten</div><div class="mv rAkTotal">–</div></div>
+            <div><div class="mk">Honorarzone / Honorarsatz</div><div class="mv"><span class="rZone">–</span> / <span class="rCorridor">–</span></div></div>
+          </section>
+
+          <section class="report-block">
+            <div class="formula" id="interpSummary">–</div>
+            <div class="formula-grid">
+              <div class="formula-item"><b>Unterer Tabellenpunkt</b><div id="interpLow" class="mono">–</div></div>
+              <div class="formula-item"><b>Oberer Tabellenpunkt</b><div id="interpHigh" class="mono">–</div></div>
+              <div class="formula-item"><b>Interpolationsfaktor</b><div id="interpT" class="mono">–</div></div>
+              <div class="formula-item"><b>Rechnung</b><div id="interpFormula" class="mono">–</div></div>
+            </div>
+          </section>
+
+          <footer class="report-footer">
+            <div>HOAI-Rechner – Schnabel Architekten Ingenieure</div><div>Seite 3 von 3</div>
+          </footer>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="box">
+      <div class="head">
+        <strong style="color:#d00000">HOAI 2021 – Honorartafel Gebäude & Innenräume</strong>
+        <button class="btn" type="button" onclick="closeModal()">Schließen</button>
+      </div>
+      <div class="cnt">
+        <div id="zoneWrap"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LOGO_KEY = 'schnabel_hoai_logo_v5';
+
+    const HOAI = {
+      "I": {
+        min: [[25000,3120],[35000,4217],[50000,5804],[75000,8342],[100000,10790],[150000,15500],[200000,20037],[300000,28750],[500000,45232],[750000,64666],[1000000,83182],[1500000,119307],[2000000,153965],[3000000,220161],[5000000,343879],[7500000,493923],[10000000,638277],[15000000,915129],[20000000,1180414],[25000000,1436874]],
+        max: [[25000,3657],[35000,4942],[50000,6801],[75000,9776],[100000,12644],[150000,18164],[200000,23480],[300000,33692],[500000,53006],[750000,75781],[1000000,97479],[1500000,139813],[2000000,180428],[3000000,258002],[5000000,402984],[7500000,578816],[10000000,747981],[15000000,1072416],[20000000,1383298],[25000000,1683837]]
+      },
+      "II": {
+        min: [[25000,3657],[35000,4942],[50000,6801],[75000,9776],[100000,12644],[150000,18164],[200000,23480],[300000,33692],[500000,53006],[750000,75781],[1000000,97479],[1500000,139813],[2000000,180428],[3000000,258002],[5000000,402984],[7500000,578816],[10000000,747981],[15000000,1072416],[20000000,1383298],[25000000,1683837]],
+        max: [[25000,4339],[35000,5865],[50000,8071],[75000,11601],[100000,15005],[150000,21555],[200000,27863],[300000,39981],[500000,62900],[750000,89927],[1000000,115675],[1500000,165911],[2000000,214108],[3000000,306162],[5000000,478207],[7500000,686862],[10000000,887604],[15000000,1272601],[20000000,1641513],[25000000,1998153]]
+      },
+      "III": {
+        min: [[25000,4339],[35000,5865],[50000,8071],[75000,11601],[100000,15005],[150000,21555],[200000,27863],[300000,39981],[500000,62900],[750000,89927],[1000000,115675],[1500000,165911],[2000000,214108],[3000000,306162],[5000000,478207],[7500000,686862],[10000000,887604],[15000000,1272601],[20000000,1641513],[25000000,1998153]],
+        max: [[25000,5412],[35000,7315],[50000,10066],[75000,14469],[100000,18713],[150000,26883],[200000,34751],[300000,49864],[500000,78449],[750000,112156],[1000000,144268],[1500000,206923],[2000000,267034],[3000000,381843],[5000000,596416],[7500000,856648],[10000000,1107012],[15000000,1587176],[20000000,2047281],[25000000,2492079]]
+      },
+      "IV": {
+        min: [[25000,5412],[35000,7315],[50000,10066],[75000,14469],[100000,18713],[150000,26883],[200000,34751],[300000,49864],[500000,78449],[750000,112156],[1000000,144268],[1500000,206923],[2000000,267034],[3000000,381843],[5000000,596416],[7500000,856648],[10000000,1107012],[15000000,1587176],[20000000,2047281],[25000000,2492079]],
+        max: [[25000,6094],[35000,8237],[50000,11336],[75000,16293],[100000,21074],[150000,30274],[200000,39134],[300000,56153],[500000,88343],[750000,126301],[1000000,162464],[1500000,233022],[2000000,300714],[3000000,430003],[5000000,671640],[7500000,964694],[10000000,1246635],[15000000,1787360],[20000000,2305496],[25000000,2806395]]
+      },
+      "V": {
+        min: [[25000,6094],[35000,8237],[50000,11336],[75000,16293],[100000,21074],[150000,30274],[200000,39134],[300000,56153],[500000,88343],[750000,126301],[1000000,162464],[1500000,233022],[2000000,300714],[3000000,430003],[5000000,671640],[7500000,964694],[10000000,1246635],[15000000,1787360],[20000000,2305496],[25000000,2806395]],
+        max: [[25000,6631],[35000,8962],[50000,12333],[75000,17727],[100000,22928],[150000,32938],[200000,42578],[300000,61095],[500000,96118],[750000,137416],[1000000,176761],[1500000,253527],[2000000,327177],[3000000,467843],[5000000,730744],[7500000,1049587],[10000000,1356339],[15000000,1944648],[20000000,2508380],[25000000,3053358]]
+      }
+    };
+
+    const LPH = [
+      {nr:1,name:'Grundlagenermittlung',pct:2},
+      {nr:2,name:'Vorplanung',pct:7},
+      {nr:3,name:'Entwurfsplanung',pct:15},
+      {nr:4,name:'Genehmigungsplanung',pct:3},
+      {nr:5,name:'Ausführungsplanung',pct:25},
+      {nr:6,name:'Vorbereitung der Vergabe',pct:10},
+      {nr:7,name:'Mitwirkung bei der Vergabe',pct:4},
+      {nr:8,name:'Objektüberwachung',pct:32},
+      {nr:9,name:'Objektbetreuung',pct:2}
+    ];
+
+    function byId(id){return document.getElementById(id)}
+
+    function setTextAll(selector,value){
+      document.querySelectorAll(selector).forEach(el => el.textContent = value);
+    }
+
+    function euro(n){
+      n = Number.isFinite(n) ? n : 0;
+      return n.toLocaleString('de-DE',{
+        style:'currency',
+        currency:'EUR',
+        maximumFractionDigits:0
+      });
+    }
+
+    function euroDec(n){
+      n = Number.isFinite(n) ? n : 0;
+      return n.toLocaleString('de-DE',{
+        style:'currency',
+        currency:'EUR',
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      });
+    }
+
+    function pct(n,digits=1){
+      n = Number.isFinite(n) ? n : 0;
+      return n.toLocaleString('de-DE',{
+        minimumFractionDigits:digits,
+        maximumFractionDigits:digits
+      }) + ' %';
+    }
+
+    function num(n,digits=6){
+      n = Number.isFinite(n) ? n : 0;
+      return n.toLocaleString('de-DE',{
+        minimumFractionDigits:digits,
+        maximumFractionDigits:digits
+      });
+    }
+
+    function corridorLabel(value){
+      if(value === 'min') return 'Basishonorarsatz';
+      if(value === 'max') return 'Oberer Honorarsatz';
+      return 'Mittelsatz';
+    }
+
+    function formatDate(value){
+      if(!value) return '–';
+      return new Date(value + 'T00:00:00').toLocaleDateString('de-DE');
+    }
+
+    function setToday(){
+      const el = byId('projectDate');
+      if(!el.value){
+        const now = new Date();
+        el.value =
+          now.getFullYear() + '-' +
+          String(now.getMonth()+1).padStart(2,'0') + '-' +
+          String(now.getDate()).padStart(2,'0');
+      }
+    }
+
+    function buildLp(){
+      byId('lpGrid').innerHTML = LPH.map(item => `
+        <div class="lp-item">
+          <label class="lp-check">
+            <input type="checkbox" class="lp-active" data-lp="${item.nr}" checked onchange="calc()">
+            LPH ${item.nr} ${item.name}
+          </label>
+          <div class="lp-pct-wrap">
+            <input type="number" class="lp-pct" data-lp="${item.nr}" value="${item.pct}" min="0" step="0.1" oninput="calc()">
+            <span>%</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getLpConfig(){
+      return LPH.map(item => {
+        const active = document.querySelector(`.lp-active[data-lp="${item.nr}"]`);
+        const percent = document.querySelector(`.lp-pct[data-lp="${item.nr}"]`);
+
+        return {
+          ...item,
+          active:Boolean(active && active.checked),
+          currentPct:Number(percent ? percent.value : 0) || 0
+        };
+      });
+    }
+
+    function lpPercent(){
+      if(byId('lpSelect').value === 'all') return 100;
+
+      return getLpConfig()
+        .filter(item => item.active)
+        .reduce((sum,item) => sum + item.currentPct,0);
+    }
+
+    function lpSplit(){
+      const config = byId('lpSelect').value === 'all'
+        ? LPH.map(item => ({...item, active:true, currentPct:item.pct}))
+        : getLpConfig();
+
+      const selected = config.filter(item => item.active);
+
+      return {
+        earlyPct:selected
+          .filter(item => item.nr <= 6)
+          .reduce((sum,item) => sum + item.currentPct,0),
+        latePct:selected
+          .filter(item => item.nr >= 7)
+          .reduce((sum,item) => sum + item.currentPct,0),
+        totalPct:selected.reduce((sum,item) => sum + item.currentPct,0)
+      };
+    }
+
+    function selectedLphText(){
+      if(byId('lpSelect').value === 'all'){
+        return 'LPH 1–9 vollständig (100,0 %).';
+      }
+
+      const selected = getLpConfig()
+        .filter(item => item.active)
+        .map(item => `LPH ${item.nr} ${item.name}: ${pct(item.currentPct)}`);
+
+      return selected.length ? selected.join(' · ') : 'Keine Leistungsphase ausgewählt.';
+    }
+
+    function repeatData(){
+      const enabled = byId('repeatRule').checked;
+      const count = Math.max(1,Math.floor(Number(byId('buildingCount').value) || 1));
+      const mode = byId('repeatMode').value;
+      const customPct = Math.max(0,Number(byId('customRepeatPct').value) || 0);
+
+      byId('customRepeatWrap').style.display =
+        enabled && mode === 'custom' ? 'block' : 'none';
+
+      byId('repeatRuleNote').textContent =
+        mode === 'custom'
+          ? 'Eigene Vereinbarung: Das erste Gebäude wird für LPH 1–6 mit 100 % angesetzt, jedes weitere Gebäude mit dem eingegebenen Anteil. LPH 7–9 werden weiterhin je Gebäude vollständig angesetzt.'
+          : 'HOAI-Staffel für LPH 1–6: erste bis vierte Wiederholung 50 %, fünfte bis siebte Wiederholung 40 %, ab der achten Wiederholung 10 %. LPH 7–9 werden je Gebäude ungemindert angesetzt.';
+
+      if(!enabled || count === 1){
+        return {
+          enabled:false,
+          mode,
+          count:1,
+          repetitions:0,
+          earlyFactor:1,
+          lateFactor:1,
+          customPct,
+          text:'nicht angewendet'
+        };
+      }
+
+      const repetitions = count - 1;
+
+      if(mode === 'custom'){
+        const earlyFactor = 1 + repetitions * (customPct/100);
+
+        return {
+          enabled:true,
+          mode,
+          count,
+          repetitions,
+          earlyFactor,
+          lateFactor:count,
+          customPct,
+          text:`${count} Gebäude; 1. Gebäude 100 %, weitere Gebäude je ${pct(customPct)} für LPH 1–6`
+        };
+      }
+
+      const firstToFourth = Math.min(repetitions,4);
+      const fifthToSeventh = Math.min(Math.max(repetitions-4,0),3);
+      const fromEighth = Math.max(repetitions-7,0);
+
+      const earlyFactor =
+        1 +
+        firstToFourth * 0.50 +
+        fifthToSeventh * 0.40 +
+        fromEighth * 0.10;
+
+      return {
+        enabled:true,
+        mode,
+        count,
+        repetitions,
+        firstToFourth,
+        fifthToSeventh,
+        fromEighth,
+        earlyFactor,
+        lateFactor:count,
+        customPct,
+        text:`${count} Gebäude; HOAI-Faktor LPH 1–6: ${num(earlyFactor,2)} / Faktor LPH 7–9: ${num(count,2)}`
+      };
+    }
+
+    function calcAK(){
+      const kg300 = Number(byId('kg300').value) || 0;
+      const kg400 = Number(byId('kg400').value) || 0;
+      const full = byId('kg400Full').checked;
+
+      if(full){
+        const ak = kg300 + kg400;
+
+        return {
+          kg300,
+          kg400,
+          limit:kg400,
+          above:0,
+          reducedAbove:0,
+          kg400AK:kg400,
+          ak,
+          formula:`KG 300 ${euro(kg300)} + KG 400 vollständig ${euro(kg400)} = ${euro(ak)}`
+        };
+      }
+
+      const limit25 = kg300 * 0.25;
+      const fullPart = Math.min(kg400,limit25);
+      const above = Math.max(0,kg400-fullPart);
+      const reducedAbove = above * 0.5;
+      const kg400AK = fullPart + reducedAbove;
+      const ak = kg300 + kg400AK;
+
+      return {
+        kg300,
+        kg400,
+        limit:fullPart,
+        above,
+        reducedAbove,
+        kg400AK,
+        ak,
+        formula:`KG 300 ${euro(kg300)} + KG 400 bis zur 25-%-Grenze ${euro(fullPart)} + 50 % des darüber liegenden KG-400-Anteils (${euro(above)} × 50 % = ${euro(reducedAbove)}) = ${euro(ak)}`
+      };
+    }
+
+    function buildMidCurve(zone){
+      return HOAI[zone].min.map((row,index) => [
+        row[0],
+        (row[1] + HOAI[zone].max[index][1]) / 2
+      ]);
+    }
+
+    function getCurve(zone,korridor){
+      return korridor === 'mid'
+        ? buildMidCurve(zone)
+        : HOAI[zone][korridor];
+    }
+
+    function interpolateHonor(zone,ak,korridor){
+      const curve = getCurve(zone,korridor);
+
+      if(ak <= curve[0][0]){
+        return {honor:curve[0][1],exact:true,low:curve[0],high:curve[0],factor:0};
+      }
+
+      if(ak >= curve[curve.length-1][0]){
+        return {
+          honor:curve[curve.length-1][1],
+          exact:true,
+          low:curve[curve.length-1],
+          high:curve[curve.length-1],
+          factor:0
+        };
+      }
+
+      for(let i=0;i<curve.length-1;i++){
+        const [a1,h1] = curve[i];
+        const [a2,h2] = curve[i+1];
+
+        if(ak === a1){
+          return {honor:h1,exact:true,low:curve[i],high:curve[i],factor:0};
+        }
+
+        if(ak === a2){
+          return {honor:h2,exact:true,low:curve[i+1],high:curve[i+1],factor:0};
+        }
+
+        if(ak > a1 && ak < a2){
+          const factor = (ak-a1)/(a2-a1);
+          const honor = h1 + factor*(h2-h1);
+
+          return {
+            honor,
+            exact:false,
+            low:curve[i],
+            high:curve[i+1],
+            factor
+          };
+        }
+      }
+
+      return {honor:0,exact:true,low:[0,0],high:[0,0],factor:0};
+    }
+
+    function calc(){
+      const akData = calcAK();
+      const ak = akData.ak;
+
+      const zone = byId('zone').value;
+      const korridor = byId('korridor').value;
+      const umbauPct = Number(byId('umbauZ').value) || 0;
+      const vatPct = Number(byId('mwst').value) || 0;
+      const freePct = Number(byId('freeHonor').value) || 0;
+      const lph = lpSplit();
+      const lphPct = lph.totalPct;
+      const repeat = repeatData();
+
+      const interpolation = interpolateHonor(zone,ak,korridor);
+      const baseHonor = interpolation.honor;
+
+      const umbauAmount = baseHonor * (umbauPct/100);
+      const honorWithUmbau = baseHonor + umbauAmount;
+      const freeAmount = honorWithUmbau * (freePct/100);
+      const honorBeforeLph = honorWithUmbau + freeAmount;
+
+      const earlyHonor =
+        honorBeforeLph *
+        (lph.earlyPct/100) *
+        repeat.earlyFactor;
+
+      const lateHonor =
+        honorBeforeLph *
+        (lph.latePct/100) *
+        repeat.lateFactor;
+
+      const netHonor = earlyHonor + lateHonor;
+      const vatAmount = netHonor * (vatPct/100);
+      const grossHonor = netHonor + vatAmount;
+
+      byId('lpWrap').style.display =
+        byId('lpSelect').value === 'custom' ? 'block' : 'none';
+
+      byId('stamp').textContent =
+        'Stand: ' + new Date().toLocaleDateString('de-DE');
+
+      const project = byId('projectName').value || '–';
+      const date = formatDate(byId('projectDate').value);
+      const client = byId('clientName').value || '–';
+      const type = byId('projectType').value || '–';
+
+      setTextAll('.rProject',project);
+      setTextAll('.rDate',date);
+      setTextAll('.rClient',client);
+      setTextAll('.rType',type);
+      setTextAll('.rAkTotal',euro(ak));
+      setTextAll('.rZone',zone);
+      setTextAll('.rCorridor',corridorLabel(korridor));
+      setTextAll('.rUmbau',pct(umbauPct));
+      setTextAll('.rFree',pct(freePct));
+      setTextAll('.rLpPct',pct(lphPct));
+      setTextAll('.rRepeat',repeat.text);
+      setTextAll('.rGrossTotal',euro(grossHonor));
+
+      byId('repeatPreview').textContent = repeat.enabled
+        ? (
+            repeat.mode === 'custom'
+              ? `${repeat.count} Gebäude · erstes 100 % · ${repeat.repetitions} weitere je ${pct(repeat.customPct)} · Faktor LPH 1–6: ${num(repeat.earlyFactor,2)}`
+              : `${repeat.count} Gebäude · HOAI-Faktor LPH 1–6: ${num(repeat.earlyFactor,2)} · LPH 7–9: ${num(repeat.lateFactor,2)}`
+          )
+        : '1 Gebäude = 100 %';
+      setTextAll('.akReportFormula',akData.formula);
+
+      byId('akPreview').textContent = euro(ak);
+      byId('akFormulaPreview').textContent = akData.formula;
+      byId('selectedLphReport').textContent = selectedLphText();
+
+      const summaryRows = [
+        ['Anrechenbare Kosten gesamt',euro(ak)],
+        [`Tabellenhonorar je Gebäude (${corridorLabel(korridor)})`,euro(baseHonor)],
+        ['Honorar netto gesamt',euro(netHonor)],
+        [`MwSt. (${pct(vatPct)})`,euro(vatAmount)]
+      ];
+
+      byId('summaryRows').innerHTML = summaryRows.map(row => `
+        <tr><td>${row[0]}</td><td>${row[1]}</td></tr>
+      `).join('');
+
+      const detailRows = [
+        ['KG 300 – Baukonstruktion je Gebäude',euro(akData.kg300)],
+        ['KG 400 – Technische Anlagen je Gebäude',euro(akData.kg400)],
+        ['Davon KG 400 anrechenbar je Gebäude',euro(akData.kg400AK)],
+        ['Anrechenbare Kosten je Gebäude',euro(ak)],
+        [`Tabellenhonorar je Gebäude (${corridorLabel(korridor)})`,euro(baseHonor)],
+        [`Umbauzuschlag je Gebäude (${pct(umbauPct)})`,euro(umbauAmount)],
+        [`Freier Zuschlag je Gebäude (${pct(freePct)})`,euro(freeAmount)],
+        ['Honorar vor Leistungsphasen je Gebäude',euro(honorBeforeLph)],
+        [`LPH 1–6 (${pct(lph.earlyPct)}) × Faktor ${num(repeat.earlyFactor,2)}`,euro(earlyHonor)],
+        [`LPH 7–9 (${pct(lph.latePct)}) × Faktor ${num(repeat.lateFactor,2)}`,euro(lateHonor)],
+        ['Honorar netto gesamt',euro(netHonor)],
+        [`MwSt. (${pct(vatPct)})`,euro(vatAmount)],
+        ['Honorar brutto gesamt',euro(grossHonor)]
+      ];
+
+      byId('detailRows').innerHTML = detailRows.map(row => `
+        <tr><td>${row[0]}</td><td>${row[1]}</td></tr>
+      `).join('');
+
+      const [a1,h1] = interpolation.low;
+      const [a2,h2] = interpolation.high;
+
+      byId('interpSummary').innerHTML = interpolation.exact
+        ? `Für die anrechenbaren Kosten von <strong>${euro(ak)}</strong> wird ein direkter Tabellenwert oder ein Randwert angesetzt.`
+        : `Für die anrechenbaren Kosten von <strong>${euro(ak)}</strong> wird linear zwischen <strong>${euro(a1)}</strong> und <strong>${euro(a2)}</strong> interpoliert.`;
+
+      byId('interpLow').textContent =
+        `AK1 = ${euro(a1)} | H1 = ${euroDec(h1)}`;
+
+      byId('interpHigh').textContent =
+        `AK2 = ${euro(a2)} | H2 = ${euroDec(h2)}`;
+
+      if(interpolation.exact){
+        byId('interpT').textContent =
+          'Kein Interpolationsschritt erforderlich.';
+
+        byId('interpFormula').textContent =
+          `Ergebnis = ${euroDec(baseHonor)}`;
+      }else{
+        byId('interpT').textContent =
+          `t = (${euroDec(ak)} − ${euroDec(a1)}) / (${euroDec(a2)} − ${euroDec(a1)}) = ${num(interpolation.factor)}`;
+
+        byId('interpFormula').textContent =
+          `H = ${euroDec(h1)} + (${euroDec(h2)} − ${euroDec(h1)}) × ${num(interpolation.factor)} = ${euroDec(baseHonor)}`;
+      }
+    }
+
+    function handleLogoUpload(event){
+      const file = event.target.files && event.target.files[0];
+      if(!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function(e){
+        const src = e.target.result;
+        localStorage.setItem(LOGO_KEY,src);
+        applyLogo(src);
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    function applyLogo(src){
+      const preview = byId('logoPreview');
+      const placeholder = byId('logoPlaceholder');
+
+      if(src){
+        preview.src = src;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+
+        document.querySelectorAll('.report-logo').forEach(img => {
+          img.src = src;
+          img.style.display = 'block';
+        });
+      }else{
+        preview.removeAttribute('src');
+        preview.style.display = 'none';
+        placeholder.style.display = 'block';
+
+        document.querySelectorAll('.report-logo').forEach(img => {
+          img.removeAttribute('src');
+          img.style.display = 'none';
+        });
+      }
+    }
+
+    function clearLogo(){
+      localStorage.removeItem(LOGO_KEY);
+      byId('logoUpload').value = '';
+      applyLogo('');
+    }
+
+    function resetForm(){
+      byId('projectName').value = 'Projekt Musterbau';
+      byId('clientName').value = 'Max Mustermann';
+      byId('projectType').value = 'Gebäude und Innenräume';
+      byId('kg300').value = 500000;
+      byId('kg400').value = 200000;
+      byId('kg400Full').checked = false;
+      byId('zone').value = 'III';
+      byId('korridor').value = 'mid';
+      byId('umbauZ').value = 0;
+      byId('mwst').value = 19;
+      byId('freeHonor').value = 0;
+      byId('lpSelect').value = 'all';
+      byId('repeatRule').checked = false;
+      byId('buildingCount').value = 1;
+      byId('repeatMode').value = 'hoai';
+      byId('customRepeatPct').value = 25;
+
+      LPH.forEach(item => {
+        document.querySelector(`.lp-active[data-lp="${item.nr}"]`).checked = true;
+        document.querySelector(`.lp-pct[data-lp="${item.nr}"]`).value = item.pct;
+      });
+
+      setToday();
+      calc();
+    }
+
+    function openModal(){
+      byId('zoneWrap').innerHTML = ['I','II','III','IV','V'].map(zone => {
+        const rows = HOAI[zone].min.map((row,index) => {
+          const ak = row[0];
+          const min = row[1];
+          const max = HOAI[zone].max[index][1];
+          const mid = (min+max)/2;
+
+          return `
+            <tr>
+              <td><strong>${euro(ak)}</strong></td>
+              <td>${euro(min)}</td>
+              <td>${euro(mid)}</td>
+              <td>${euro(max)}</td>
+            </tr>
+          `;
+        }).join('');
+
+        return `
+          <h2>Zone ${zone}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>AK</th>
+                <th>Basis</th>
+                <th>Mittel</th>
+                <th>Oben</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+      }).join('');
+
+      byId('modal').classList.add('open');
+    }
+
+    function closeModal(){
+      byId('modal').classList.remove('open');
+    }
+
+    document.addEventListener('DOMContentLoaded',() => {
+      buildLp();
+      setToday();
+      applyLogo(localStorage.getItem(LOGO_KEY));
+      calc();
+    });
+  </script>
 </body>
 </html>
